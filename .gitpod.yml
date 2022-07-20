@@ -9,8 +9,16 @@ tasks:
                  -v ${PWD}/config/cassandra.yaml:/etc/cassandra/cassandra.yaml \
                  -v ${PWD}/config/cassandra-rackdc-west.properties:/etc/cassandra/cassandra-rackdc.properties cassandra:4.0
       INSTANCE1=$(docker inspect --format='{{ .NetworkSettings.IPAddress }}' Cassandra-1)
+      docker run -p 9043:9042 -d \
+                 --name Cassandra-2 \
+                 -e CASSANDRA_SEEDS=$INSTANCE1 \
+                 -v ${PWD}/config/cassandra.yaml:/etc/cassandra/cassandra.yaml \
+                 -v ${PWD}/config/cassandra-rackdc-east.properties:/etc/cassandra/cassandra-rackdc.properties cassandra:4.0
+      INSTANCE2=$(docker inspect --format='{{ .NetworkSettings.IPAddress }}' Cassandra-2)
 ports:
   - port: 9042
+    onOpen: ignore
+  - port: 9043
     onOpen: ignore
 github:
   prebuilds:
