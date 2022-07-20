@@ -11,7 +11,7 @@ tasks:
                  -e CASSANDRA_DC=DC-West \
                  -e CASSANDRA_RACK=rack1 \
                  cassandra:4.0
-      sleep 120
+      timeout 60 bash -c 'until cqlsh localhost 9042 -e "describe cluster" >/dev/null 2>&1; do sleep 1; done'
       INSTANCE1=$(docker inspect --format='{{ .NetworkSettings.IPAddress }}' Cassandra-1)
       docker run -p 9043:9042 -d \
                  --name Cassandra-2 \
