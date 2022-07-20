@@ -1,0 +1,20 @@
+tasks:
+  - name: install-dependencies
+    init: |
+      docker pull cassandra:4.0
+      pip install -U cqlsh
+    command: | 
+      docker run -p 9042:9042 -d \
+                 --name Cassandra-1 \
+                 -v ${PWD}/config/cassandra.yaml:/etc/cassandra/cassandra.yaml \
+                 -v ${PWD}/config/cassandra-rackdc-west.properties:/etc/cassandra/cassandra-rackdc.properties cassandra:4.0
+      INSTANCE1=$(docker inspect --format='{{ .NetworkSettings.IPAddress }}' Cassandra-1)
+ports:
+  - port: 9042
+    onOpen: ignore
+github:
+  prebuilds:
+    main: true
+vscode:
+  extensions:
+    - https://github.com/HadesArchitect/katapod/releases/download/0.3.6/katapod-0.3.6.vsix
