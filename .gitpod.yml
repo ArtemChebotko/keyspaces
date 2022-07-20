@@ -6,13 +6,13 @@ tasks:
     command: | 
       docker run -p 9042:9042 -d \
                  --name Cassandra-1 \
-                 -e CASSANDRA_CLUSTER_NAME='Cassandra Cluster X'
+                 -e CASSANDRA_CLUSTER_NAME='Cassandra Cluster X' \
                  cassandra:4.0
       sleep 120
       INSTANCE1=$(docker inspect --format='{{ .NetworkSettings.IPAddress }}' Cassandra-1)
       docker run -p 9043:9042 -d \
                  --name Cassandra-2 \
-                 -e CASSANDRA_CLUSTER_NAME='Cassandra Cluster X'
+                 -e CASSANDRA_CLUSTER_NAME='Cassandra Cluster X' \
                  -e CASSANDRA_SEEDS=$INSTANCE1 \
                  cassandra:4.0
       INSTANCE2=$(docker inspect --format='{{ .NetworkSettings.IPAddress }}' Cassandra-2)
