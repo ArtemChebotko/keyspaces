@@ -9,6 +9,4 @@ Start the CQL shell:
 cqlsh
 ```
 
-The CQL shell connected to a Cassandra node 
-
 [continue](command:katapod.loadPage?step4){.orange_bar}
