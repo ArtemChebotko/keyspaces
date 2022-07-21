@@ -4,25 +4,13 @@
 ### [◂](command:katapod.loadPage?step5){.steps} Step 6 of 7 [▸](command:katapod.loadPage?step7){.steps}
 </div>
 
-Find all available information about an email with id `8ae31dd0-d361-11ea-a40e-5dd6331dfc45`:
+Having `3` replicas per datacenter is a good starting point for 
+relatively small clusters. As the number of nodes in a datacenter becomes larger, 
+a higher replication factor may become a better choice.
 
-<details>
-  <summary>Solution</summary>
-
-```
-SELECT id, "to", "from",
-       toTimestamp(id) AS timestamp,
-       subject, body,
-       attachments
-FROM emails
-WHERE id = 8ae31dd0-d361-11ea-a40e-5dd6331dfc45;
-```
-
-</details>
-
-<br/>
-
-Notice the file names and sizes (measured in kilobytes) in column `attachments`. For more efficient retrieval, we can assume that larger files are split into 
-chunks of 1000KB or less. For example, a 530KB file can be stored as one chunk, while a 2416KB file has to be stored using 3 chunks.  
+The number of replicas can affect consistency, availability, latency and throughput.
+Increasing a replication factor improves availability as it becomes possible to tolerate 
+more replica failures. Also, a larger set of replicas can serve more concurrent requests 
+and result in better response times. 
 
 [continue](command:katapod.loadPage?step7){.orange_bar}

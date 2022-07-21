@@ -4,38 +4,35 @@
 ### [◂](command:katapod.loadPage?step6){.steps} Step 7 of 7 [▸](command:katapod.loadPage?finish){.steps}
 </div>
 
-Find an attachment file with name `Budget.xlsx` for an email with id `8ae31dd0-d361-11ea-a40e-5dd6331dfc45`, assuming that the complete file is stored in one partition with chunk number `1`:
+Try the following five CQL shell commands and CQL statements that are applicable to keyspaces. 
 
-<details>
-  <summary>Solution</summary>
-
+1. List the names of all keyspaces in the cluster:
 ```
-SELECT filename, type, value,
-       blobAsText(value)
-FROM attachments
-WHERE email_id = 8ae31dd0-d361-11ea-a40e-5dd6331dfc45
-  AND filename = 'Budget.xlsx'
-  AND chunk_number = 1;
+DESCRIBE KEYSPACES;
 ```
 
-</details>
-
-<br/>
-
-Find an attachment file with name `Presentation.pptx` for an email with id `8ae31dd0-d361-11ea-a40e-5dd6331dfc45`, assuming that the three file chunks are stored across three partitions with chunk numbers `1`, `2` and `3`:
-
-<details>
-  <summary>Solution</summary>
-
+2. Output all CQL statements that can be used to recreate the given keyspace
+and all the schema objects that belong to it:
 ```
-SELECT filename, type, value,
-       blobAsText(value)
-FROM attachments
-WHERE email_id = 8ae31dd0-d361-11ea-a40e-5dd6331dfc45
-  AND filename = 'Presentation.pptx'
-  AND chunk_number IN (1,2,3);
+DESCRIBE KEYSPACE production_keyspace_2;
 ```
 
-</details>
+3. Alter properties of the given keyspace:
+```
+ALTER KEYSPACE production_keyspace_2
+WITH replication = 
+     {'class': 'NetworkTopologyStrategy',
+      'DC-West': 3, 'DC-East': 5};
+```
+
+4. Set the given keyspace as the current working keyspace:
+```
+USE production_keyspace_2;
+```
+
+5. Remove the given keyspace and all the objects that belong to it:
+```
+DROP KEYSPACE production_keyspace_1;
+```
 
 [continue](command:katapod.loadPage?finish){.orange_bar}

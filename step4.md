@@ -4,30 +4,29 @@
 ### [◂](command:katapod.loadPage?step3){.steps} Step 4 of 7 [▸](command:katapod.loadPage?step5){.steps}
 </div>
 
-Find all folder labels and colors for user `joe@datastax.com`:
+Create a keyspace with name `simple_keyspace_1` that uses `SimpleStrategy` and a replication factor of `1`:
+
+```
+CREATE KEYSPACE simple_keyspace_1
+WITH replication = {'class': 'SimpleStrategy', 
+                    'replication_factor': 1};
+```
+
+The `replication_factor` option specifies a replication factor for the entire cluster. 
+That means that `SimpleStrategy` does not respect datacenter layouts and, therefore, is not a good choice 
+for production. 
+
+
+Create a keyspace with name `simple_keyspace_2` that uses `SimpleStrategy` and a replication factor of `2`.
+Use tab completion in `cqlsh` to your advantage.
 
 <details>
   <summary>Solution</summary>
 
 ```
-SELECT label, color 
-FROM folders_by_user
-WHERE username = 'joe@datastax.com';   
-```
-
-</details>
-
-<br/>
-
-Find all folder labels and unread email quantities for user `joe@datastax.com`:
-
-<details>
-  <summary>Solution</summary>
-
-```
-SELECT label, num_unread 
-FROM unread_email_stats
-WHERE username = 'joe@datastax.com'; 
+CREATE KEYSPACE simple_keyspace_2
+WITH replication = {'class': 'SimpleStrategy', 
+                    'replication_factor': 2};
 ```
 
 </details>
