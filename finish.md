@@ -2,10 +2,10 @@
 
 **In this scenario, you explored:**
 
-* Cassandra Query Language (CQL)
-* The CQL shell
-* Statements `CREATE KEYSPACE`, `USE` and `CREATE TABLE`
-* Statements `INSERT`, `SELECT`, `UPDATE` and `DELETE`
+* Keyspaces and the CQL `CREATE KEYSPACE` statement 
+* Data replication strategies `SimpleStrategy` and `NetworkTopologyStrategy`
+* Selecting a data replication strategy and replication factor
+* Useful CQL statements and CQL shell commands that work with keyspaces
 
 **Learn more about Cassandra on [datastax.com/dev](https://datastax.com/dev):**
 
