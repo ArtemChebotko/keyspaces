@@ -10,10 +10,10 @@ Tables, materialized views, indexes and other schema objects are always defined 
 
 To create a keyspace, Cassandra Query Language has the `CREATE KEYSPACE` statement with the following simplified syntax:
 
-<code>
+<code><pre>
 CREATE KEYSPACE [ IF NOT EXISTS ] keyspace_name
     WITH REPLICATION = { replication_map };
-</code>
+</pre></code>
 
 A *keyspace name* can contain alphanumeric characters and underscores. 
 By default, names are case-insensitive, but case sensitivity can be forced by using double quotation marks around a name.
