@@ -5,4 +5,6 @@ timeout 60 bash -c 'until cqlsh localhost 9042 -e "describe cluster" >/dev/null 
 timeout 60 bash -c 'until cqlsh localhost 9043 -e "describe cluster" >/dev/null 2>&1; do sleep 1; echo -n "."; done'
 echo ' Ready!'
 
+sleep 10
+
 docker exec -i -t Cassandra-1 bash -c 'nodetool status'
